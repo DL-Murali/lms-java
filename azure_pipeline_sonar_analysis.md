@@ -1,29 +1,37 @@
-Stories 1  : Perform sonar analysis  for LMS Repo 
+# Perform sonar analysis  for LMS Repo Using Azure Pipeline
+## create Project
+- goto your https://aex.dev.azure.com/
+- create one project and select Git & Scrum
+- goto Azure Repo and Import code
 
+## Create token 
 
-# create Project
-
-
-# Create token 
-
-
+- goto your organization 
+- click on **user settings** you will find in top right corner
+- click on **Personal Access Token** and create new one
 - PAT: utabolisuhmjekab2q2p4z62sxq3foopz6b442t2dn6bnq4sl2ia
 
 
-# Launch VM and install sonarqube
+## Launch VM and install sonarqube
 
 - VM type: D2s_v3 [2 cpus, 8gb]
 - username: murali
 - password: murali12345@
 
+## Installations
+- install docker
 - run sonar container
+## Access SonarQube in Browser
 
-- password: admin123
-
+- pub-ip:9000
+- default username:password = admin:admin
+- Set new password : admin123
 
 ## create project in sonarqube using Azure Pipeline
 
 ### Analyze your project with Azure DevOps Pipelines
+- it will suggest you steps to do
+- Goto your **Azure Devops portal**
 - Install SonarQube extension for Azure DevOps
   - goto your azure devops org settings 
   - click on extentions -> browse marketplace
@@ -31,19 +39,18 @@ Stories 1  : Perform sonar analysis  for LMS Repo
   - install it for your org
   - check in extentions, you will find sonarqube extention
 
-
-
 ### Add a new SonarQube Service Endpoint in your project
-- In Azure DevOps, go to Project settings > Pipeline ->Service connections.
+- In Azure DevOps, go to Project settings -> **Pipeline** -> **Service connections**.
 - create new service connection -> SonarQube.
 - Enter your SonarQube server url:http://172.190.107.3:9000
 
+- **Note**: You need to generate one token in SonarQube
 - Enter an existing token, or a newly generated one:Generate a token
 - Enter a memorable connection name.
 - save the connection
 - you will see created service connection
 
-- goto your sonarqube portal and select Configure Analysis [ .NET, Maven,.....]
+- goto your sonarqube portal and select Configure Analysis [ .NET, **Maven**,.....]
 
 
 ### Azure pipeline setup
@@ -57,24 +64,42 @@ Stories 1  : Perform sonar analysis  for LMS Repo
 - click on Show assistant and select prepare 
 - Configuration task before your build task:
   - Select the SonarQube server endpoint you created in Step 2.
-  - Under Choose the way to run the analysis,      select Use standalone scanner.
-  - Select the Manually provide configuration mode.
-  - In the
-Project Key
-field, enter
-sonar_sonar_c4487fbe-4cb1-42f2-ae24-f3dc0645a4af
+  - Under Choose the way to run the analysis, select **ntegrate with Maven or Gradle**.
+  - In advanced Option Paste sonar key and project name
+  ```
+  # Additional properties that will be passed to the scanner,
+  # Put one key=value per line, example:
+  # sonar.exclusions=**/*.bin
+  sonar.projectKey=lms-java_lms-java_9053f852-7773-4b9e-9946-b91a0a413e73
+  sonar.projectName=lms-java
+  ```
+  - click on add
 
 #### Part-2
 
-- Add a new Run Code Analysis task after your build task.
+- now type **Java tool installer** in Task assisstant
+  - JDK Version: '17'
+  - jdk Architecture: 'x64'
+  - jdk Source: 'PreInstalled'
+- click on add    
 
 #### Part-3
 
-- Add a new Publish Quality Gate Result task to  publish SonarQube's Quality Gate results on your build pipeline summary.
+- Now type **Maven** in Task assisstant
+- maven Pom File: 'LMS-BE/pom.xml'
+- goals: 'clean verify sonar:sonar'
+- options: '-DskipTests'
+- publish JUnit Results: true
+- testResultsFiles: '**/surefire-reports/TEST-*.xml'
+- test Run Title: 'maven scan'
+- Advanced
+  - Code Analysis
+    - Run SonarQube or SonarCloud analysis
+  - SonarQube scanner for Maven version
+    - Use version declared in your pom.xml
+- click on add  
 
-- Under the Triggers tab of your pipeline, check Enable continuous integration and select the main branch
-
-- save and run the pipeline
+- **save and run the pipeline**
 
 
 ## Pipeline Script
