@@ -5,7 +5,7 @@ pipeline {
         stage('Sonar Analysis') {
             steps {
                 script {
-		    dir('cd LMS-BE') {
+		    dir('cd lms-java/LMS-BE/') {
 		       echo 'Running Maven clean, verify, and SonarQube analysis...'
                        sh 'mvn clean verify sonar:sonar ' +
                           "-Dsonar.projectKey=lms-java " +
