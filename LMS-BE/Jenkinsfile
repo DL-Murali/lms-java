@@ -20,6 +20,7 @@ pipeline {
     post {
         success {
             script {
+                echo 'Sending success email...'
                 emailext body: 'This is to notify that the build job has been successful.',
                           subject: 'Jenkins Notification - Build Successful',
                           to: 'sathishgodavarthi@gmail.com',
@@ -27,7 +28,15 @@ pipeline {
             }
         }
 
-        
+        failure {
+            script {
+                echo 'Sending failure email...'
+                emailext body: 'This is to notify that the build job has failed. Please check the logs for details.',
+                          subject: 'Jenkins Notification - Build Failed',
+                          to: 'sathishgodavarthi@gmail.com',
+                          attachLog: true
+                currentBuild.result = 'FAILURE' // Marking the build as failure explicitly
+            }
         }
     }
-
+}
