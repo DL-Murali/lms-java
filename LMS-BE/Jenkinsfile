@@ -21,7 +21,7 @@ pipeline {
              script {
                  emailext subject: 'Build Successful',
                            body: 'The build is successful. See details below.',
-                           to: 'sathishgodavarthi@gmail.com',
+                           to: 'sathishgodavarthi89@gmail.com',
                            attachLog: true
             }
         }
