@@ -5,7 +5,7 @@ pipeline {
         stage('Sonar Analysis') {
             steps {
                 echo 'Running Maven clean, verify, and SonarQube analysis...'
-                sh 'cd LMS-BE && mvn clean verify sonar:sonar ' +
+                sh 'cd LMS-BE/ && mvn clean verify sonar:sonar ' +
                           "-Dsonar.projectKey=lms-java " +
                           "-Dsonar.projectName='lms-java' " +
                           "-Dsonar.host.url=http://13.210.238.114:9000 " +
