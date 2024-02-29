@@ -4,23 +4,38 @@ pipeline {
     stages {
         stage('Sonar Analysis') {
             steps {
-                echo 'Running Maven clean, verify, and SonarQube analysis...'
-                sh 'cd LMS-BE/ && mvn clean verify sonar:sonar ' +
-                        "-Dsonar.projectKey=lms-java " +
-                        "-Dsonar.projectName='lms-java' " +
-                        "-Dsonar.host.url=http://3.106.215.229:9000 " +
-                        "-Dsonar.login=sqp_d7d2985cc79fe64296845c9e290b2a54a022051b " +
-                        "-DskipTests "
+                script {
+                    echo 'Running Maven clean, verify, and SonarQube analysis...'
+                    sh 'cd LMS-BE/ && mvn clean verify sonar:sonar ' +
+                            "-Dsonar.projectKey=lms-java " +
+                            "-Dsonar.projectName='lms-java' " +
+                            "-Dsonar.host.url=http://3.106.215.229:9000 " +
+                            "-Dsonar.login=sqp_d7d2985cc79fe64296845c9e290b2a54a022051b " +
+                            "-DskipTests "
+                }
             }
         }
-        stage('email notification') {
-            steps {
-                emailext body: 'this is to notify that build job has been started',
-                          subject: 'jenkins-notification',
+    }
+
+    post {
+        success {
+            script {
+                emailext subject: 'Build Successful: ${currentBuild.fullDisplayName}',
+                          body: 'The build is successful. See details below:',
                           to: 'sathishgodavarthi@gmail.com',
-                          attachLog: true
+                          attachLog: true,
+                          compressLog: true
+            }
+        }
+
+        failure {
+            script {
+                emailext subject: 'Build Failed: ${currentBuild.fullDisplayName}',
+                          body: 'The build has failed. See details below:',
+                          to: 'sathishgodavarthi@gmail.com',
+                          attachLog: true,
+                          compressLog: true
             }
         }
     }
 }
-
