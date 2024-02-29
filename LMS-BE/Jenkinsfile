@@ -20,21 +20,20 @@ pipeline {
     post {
         success {
             script {
-                emailext subject: 'Build Successful: ${currentBuild.fullDisplayName}',
-                          body: 'The build is successful. See details below:',
+                emailext body: 'This is to notify that the build job has been successful.',
+                          subject: 'Jenkins Notification - Build Successful',
                           to: 'sathishgodavarthi@gmail.com',
-                          attachLog: true,
-                          compressLog: true
+                          attachLog: true
             }
         }
 
         failure {
             script {
-                emailext subject: 'Build Failed: ${currentBuild.fullDisplayName}',
-                          body: 'The build has failed. See details below:',
+                emailext body: 'This is to notify that the build job has failed. Please check the logs for details.',
+                          subject: 'Jenkins Notification - Build Failed',
                           to: 'sathishgodavarthi@gmail.com',
-                          attachLog: true,
-                          compressLog: true
+                          attachLog: true
+                currentBuild.result = 'FAILURE' // Marking the build as failure explicitly
             }
         }
     }
