@@ -13,16 +13,13 @@ pipeline {
 			  "-DskipTests " 
              } 
 	   }
-        }
-       
-
-       
+        }    
         stage('email notification') {
             steps {
               emailext body: 'this is to notify that build job has been started',
- 	    subject: 'jenkins-notification',
-	    to: 'sathishgodavarthi@gmail.com',
-	    attachLog: true
+ 	      subject: 'jenkins-notification',
+	      to: 'sathishgodavarthi@gmail.com',
+	      attachLog: true
         }
     }          
  }
