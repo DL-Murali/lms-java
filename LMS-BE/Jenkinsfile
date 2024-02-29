@@ -14,7 +14,9 @@ pipeline {
              } 
 	   }
         }
-     
+       
+
+       stages {
         stage('email notification') {
               steps {
                  emailext body: 'this is to notify that build job has been started',
@@ -24,6 +26,6 @@ pipeline {
         }
     }          
  }
-        
+ }       
     
  
