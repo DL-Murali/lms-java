@@ -15,21 +15,15 @@ pipeline {
 	   }
         }
      
-       
-      post {
-         success {
-             script {
-                 emailext subject: 'Build Successful',
-                           body: 'The build is successful. See details below.',
-                           to: 'sathishgodavarthi89@gmail.com',
-                           attachLog: true
-            }
+        stage('email notification') {
+              steps {
+                 emailext body: 'this is to notify that build job has been started',
+ 	      subject: 'jenkins-notification',
+	      to: 'sathishgodavarthi@gmail.com',
+	      attachLog: true
         }
-    }
-
-}
-
-
-
-
-      
+    }          
+ }
+        
+    
+ 
