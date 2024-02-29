@@ -13,7 +13,23 @@ pipeline {
 			  "-DskipTests " 
              } 
 	   }
-      }
-      }
+        }
+     
+       
+      post {
+         success {
+             script {
+                 emailext subject: 'Build Successful',
+                           body: 'The build is successful. See details below.',
+                           to: 'sathishgodavarthi@gmail.com',
+                           attachLog: true
+            }
+        }
+    }
+
+}
+
+
+
 
       
