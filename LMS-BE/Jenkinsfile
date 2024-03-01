@@ -15,6 +15,20 @@ pipeline {
             }
         }
 
+        stage {
+            steps {
+                script {
+                    def containerExists = sh(script: 'docker inspect -f {{.state.Running}} mysql', returnStatus: true)
+                    if (containerExists == 0) {
+                        echo 'MYSQL container already exists'
+                    } else {
+                        sh 'docker container run -d --name mysql --network lmsnetwork -e MYSQL_ROOT_PASSWORD=Lms@12345 -p 3306:3306 mysql:latest'
+                    }    
+                }
+            }
+        }
+        
+
         stage('Email notification') {
             steps {
                 script {
