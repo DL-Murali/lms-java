@@ -28,19 +28,10 @@ pipeline {
             }
         }
 
-        stage('Email notification') {
-            steps {
-                script {
-                    emailext attachmentsPattern: 'build.log',
-                              body: 'Build Filure',
-                              subject: 'Jenkins Notification - Build Filure',
-                              to: 'sathishgodavarthi89@gmail',  
-                              attachLog: true,
-                              compressLog: true
-                }
-            }
-        }
     }
 }
+       
+    
+
                
 
