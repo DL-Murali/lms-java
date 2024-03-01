@@ -16,24 +16,11 @@ pipeline {
             }
         }
     }
-        stage('Email notification') {
-           mail bcc: '', body: 'finally succussed ', cc: 'muralialakuntla3@gmail.com', from: '', replyTo: '', subject: 'jenkins mail', to: 'sathishgodavarthi89@gmail.com'
+    stage('Email notification') {
+       mail bcc: '', body: 'finally succussed ', cc: 'muralialakuntla3@gmail.com', from: '', replyTo: '', subject: 'jenkins mail', to: 'sathishgodavarthi89@gmail.com'
         }
     
     
     
-    post {
-        success {
-            script {
-                emailext attachmentsPattern: 'build.log',
-                          body: 'This is to notify that the build job has been successful.\n\nBuild URL: ${BUILD_URL}',
-                          subject: 'Jenkins Notification - Build Successful',
-                          to: 'sathishgodavarthi89@gmail.com',
-                          recipientProviders: [[$class: 'DevelopersRecipientProvider']],
-                          attachLog: true,
-                          compressLog: true
-            }
-        }
-    }
+    
 }
-
