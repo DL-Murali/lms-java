@@ -22,7 +22,9 @@ pipeline {
                               body: 'finally successful',
                               subject: 'Jenkins Notification - Build Successful',
                               to: 'sathishgodavarthi89@gmail.com',
-                              cc: 'sathishgodavarthi@gmail.com' ,
+                              recipientProviders: [
+                                  [$class: 'EditableEmailRecipientProvider', addresses: 'sathishgodavarthi@example.com'],
+                              ]    
                               attachLog: true,
                               compressLog: true
                }  
