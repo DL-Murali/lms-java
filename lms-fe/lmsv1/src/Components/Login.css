@@ -1,0 +1,16 @@
+.bg-dark{
+height: 100vh;
+}
+.bg-white{
+ width: max-content;
+ height: max-content;
+ padding: 10px 40px;
+
+}
+input{
+    border: 1px solid gray;
+    outline: none;
+}
+input:focus{
+    border: 2px solid blue;
+}
