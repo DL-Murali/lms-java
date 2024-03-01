@@ -20,11 +20,11 @@ pipeline {
     post {
         success {
             script {
-                echo 'Sending success email...'
                 emailext body: 'This is to notify that the build job has been successful.',
                           subject: 'Jenkins Notification - Build Successful',
                           to: 'sathishgodavarthi89@gmail.com',
                           attachLog: true
+                
             }
         }
     }
