@@ -17,17 +17,18 @@ pipeline {
         }
 
         stage('Email notification') {
-            script {
-                emailext attachmentsPattern: 'build.log',
-                          body: 'This is to notify that the build job has been successful.\n\nBuild URL: ${BUILD_URL}',
-                          subject: 'Jenkins Notification - Build Successful',
-                          to: 'sathishgodavarthi89@gmail.com',
-                          cc: 'muralialakuntla3@gmail.com',
-                          bcc: '',
-                          replyTo: '',
-                          recipientProviders: [[$class: 'DevelopersRecipientProvider']],
-                          attachLog: true,
-                          compressLog: true
+             steps {  
+                script {
+                    emailext attachmentsPattern: 'build.log',
+                              body: 'This is to notify that the build job has been successful.\n\nBuild URL: ${BUILD_URL}',
+                              subject: 'Jenkins Notification - Build Successful',
+                              to: 'sathishgodavarthi89@gmail.com',
+                              cc: 'muralialakuntla3@gmail.com',
+                              bcc: '',
+                              replyTo: '',
+                              recipientProviders: [[$class: 'DevelopersRecipientProvider']],
+                              attachLog: true,
+                              compressLog: true
             }
         }
     }
@@ -39,4 +40,5 @@ pipeline {
             }
         }
     }
+}
 }
