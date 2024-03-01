@@ -21,10 +21,7 @@ pipeline {
                     emailext attachmentsPattern: 'build.log',
                               body: 'finally successful',
                               subject: 'Jenkins Notification - Build Successful',
-                              to: 'sathishgodavarthi89@gmail.com',
-                              recipientProviders: [
-                                  [$class: 'EditableEmailRecipientProvider', addresses: 'sathishgodavarthi@example.com'],
-                              ],   
+                              to: 'sathishgodavarthi89@gmail, chetan1993k@gmail.com',  
                               attachLog: true,
                               compressLog: true
                }  
