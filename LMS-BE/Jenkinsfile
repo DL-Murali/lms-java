@@ -22,7 +22,7 @@ pipeline {
                               body: 'finally successful',
                               subject: 'Jenkins Notification - Build Successful',
                               to: 'sathishgodavarthi89@gmail.com',
-                              cc: 'chetan1993k@gmail.com' ,
+                              cc: 'sathishgodavarthi@gmail.com' ,
                               attachLog: true,
                               compressLog: true
                }  
