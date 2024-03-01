@@ -18,17 +18,17 @@ pipeline {
     }
 
     post {
-       success {
-           script {
-               emailext attachmentsPattern: 'build.log',
-                        body: 'This is to notify that the build job has been successful.\n\nBuild URL: ${BUILD_URL}',
-                        recipientProviders: [[$class: 'DevelopersRecipientProvider']]mail update
-                        subject: 'Jenkins Notification - Build Successful',
-                        to: 'sathishgodavarthi@gmail.com',
-                        attachLog: true,
-                        compressLog: true 
-              }
+        success {
+            script {
+                emailext attachmentsPattern: 'build.log',
+                          body: 'This is to notify that the build job has been successful.\n\nBuild URL: ${BUILD_URL}',
+                          subject: 'Jenkins Notification - Build Successful',
+                          to: 'sathishgodavarthi@gmail.com',
+                          recipientProviders: [[$class: 'DevelopersRecipientProvider']],
+                          attachLog: true,
+                          compressLog: true
+            }
+        }
     }
 }
-        }
-  
+
