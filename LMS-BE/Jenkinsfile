@@ -16,20 +16,10 @@ pipeline {
             }
         }
 
-        stage('Email notification') {
-             steps {  
-                script {
-                    emailext attachmentsPattern: 'build.log',
-                              body: 'This is to notify that the build job has been successful.\n\nBuild URL: ${BUILD_URL}',
-                              subject: 'Jenkins Notification - Build Successful',
-                              to: 'sathishgodavarthi89@gmail.com',
-                              cc: 'muralialakuntla3@gmail.com',                          
-                              recipientProviders: [[$class: 'DevelopersRecipientProvider']],
-                              attachLog: true,
-                              compressLog: true
-            }
-        }
     }
-
-   }
+post {
+    always {
+        mail bcc: '', body: '"<br> project:${env.JOB_NAME} <br> build number:${env.BUILD_NUMBER} <br> url: ${env.BUILD_URL}"', cc: 'muralialakuntla3@gmail.com', from: '', replyTo: '', subject: '${current build.result}', to: 'sathishgodavarthi89@gmail.com'
+    }
+}
 }
