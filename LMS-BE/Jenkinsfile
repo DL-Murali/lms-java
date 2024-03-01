@@ -33,12 +33,5 @@ pipeline {
         }
     }
 
-    post {
-        success {
-            script {
-                // Additional success post-build actions if needed
-            }
-        }
-    }
-}
+   }
 }
