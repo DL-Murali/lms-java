@@ -15,11 +15,22 @@ pipeline {
                 }
             }
         }
-
-    }
+        stage('Email notification') {
+            steps {
+                script {
+                    emailext attachmentsPattern: 'build.log',
+                              body: 'finally successful',
+                              subject: 'Jenkins Notification - Build Successful',
+                              to: 'sathishgodavarthi89@gmail.com',
+                              attachLog: true,
+                              compressLog: true
+               }  
+            }
+        }
 post {
     always {
         mail bcc: '', body: """ 'Project: ${env.JOB_NAME} <br/> Build Number: ${env.BUILD_NUMBER} <br/> URL: ${env.BUILD_URL}'""", cc: 'muralialakuntla3@gmail.com', from: '', replyTo: '', subject: "'${currentBuild.result}'", to: 'sathishgodavarthi89@gmail.com' 
     }
+}
 }
 }
