@@ -16,7 +16,6 @@ pipeline {
             }
         }
     }
-
         stage('Email notification') {
            mail bcc: '', body: 'finally succussed ', cc: 'muralialakuntla3@gmail.com', from: '', replyTo: '', subject: 'jenkins mail', to: 'sathishgodavarthi89@gmail.com'
         }
