@@ -27,16 +27,7 @@ pipeline {
                           attachLog: true
             }
         }
-
-        failure {
-            script {
-                echo 'Sending failure email...'
-                emailext body: 'This is to notify that the build job has failed. Please check the logs for details.',
-                          subject: 'Jenkins Notification - Build Failed',
-                          to: 'sathishgodavarthi89@gmail.com',
-                          attachLog: true
-                currentBuild.result = 'FAILURE' // Marking the build as failure explicitly
-            }
-        }
     }
-}
+        }
+  
+
