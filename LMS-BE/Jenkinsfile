@@ -21,8 +21,10 @@ pipeline {
     success {
         script {
             emailext attachmentsPattern: 'build.log',
+                      body: 'This is to notify that the build job has been successful.\n\nBuild URL: ${BUILD_URL}',
+                      recipientProviders: [[$class: 'DevelopersRecipientProvider']]mail update
                       subject: 'Jenkins Notification - Build Successful',
-                      to: 'sathishgodavarthi89@gmail.com',
+                      to: 'sathishgodavarthi@gmail.com',
                       attachLog: true,
                       compressLog: true
               }
