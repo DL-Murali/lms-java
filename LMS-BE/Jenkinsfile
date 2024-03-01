@@ -27,7 +27,7 @@ pipeline {
                       recipientProviders: [[$class: 'DevelopersRecipientProvider']],
                       attachLog: true,
                       compressLog: true
-        }
+              }
     }
 }
         }
