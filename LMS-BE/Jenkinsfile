@@ -15,7 +15,7 @@ pipeline {
             }
         }
 
-        stage {
+        stage('Check Database Container') {
             steps {
                 script {
                     def containerExists = sh(script: 'docker inspect -f {{.state.Running}} mysql', returnStatus: true)
