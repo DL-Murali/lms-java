@@ -24,7 +24,7 @@ pipeline {
                               to: 'sathishgodavarthi89@gmail.com',
                               recipientProviders: [
                                   [$class: 'EditableEmailRecipientProvider', addresses: 'sathishgodavarthi@example.com'],
-                              ]    
+                              ],   
                               attachLog: true,
                               compressLog: true
                }  
