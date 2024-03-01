@@ -1,20 +1,20 @@
 pipeline {
     agent any
-        
+  
     stages {
-        stage('Sonar Analysis') {
+        stage('Check Docker Network') {
             steps {
                 script {
-                    echo 'Running Maven clean, verify, and SonarQube analysis...'
-                    sh 'cd LMS-BE/ && mvn clean verify sonar:sonar ' +
-                            "-Dsonar.projectKey=lms-java " +
-                            "-Dsonar.projectName='lms-java' " +
-                            "-Dsonar.host.url=http://13.236.84.113:9000 " +
-                            "-Dsonar.login=sqp_9857a9e70109074ce7add064e16cecfece91f194 " +
-                            "-DskipTests "
+                    def networkExists = sh(script: 'docker network inspect lmsnetwork > /dev/null 2>&1', returnStatus: true)
+                    if (networkExists == 0) {
+                        echo 'Docker network lmsnetwork already exists'
+                    } else {
+                        sh 'docker network create -d bridge lmsnetwork'
+                    }
                 }
             }
         }
+
         stage('Email notification') {
             steps {
                 script {
@@ -24,9 +24,10 @@ pipeline {
                               to: 'sathishgodavarthi89@gmail, chetan1993k@gmail.com',  
                               attachLog: true,
                               compressLog: true
-               }  
+                }
             }
         }
     }
-}    
+}
+               
 
