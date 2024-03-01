@@ -19,9 +19,22 @@ pipeline {
             steps {
                 script {
                     emailext attachmentsPattern: 'build.log',
-                              body: 'finally successful',
+                              body: 'Build successful',
                               subject: 'Jenkins Notification - Build Successful',
-                              to: 'sathishgodavarthi89@gmail, chetan1993k@gmail.com',  
+                              to: 'sathishgodavarthi89@gmail',  
+                              attachLog: true,
+                              compressLog: true
+                }
+            }
+        }
+
+        stage('Email notification') {
+            steps {
+                script {
+                    emailext attachmentsPattern: 'build.log',
+                              body: 'Build Filure',
+                              subject: 'Jenkins Notification - Build Filure',
+                              to: 'sathishgodavarthi89@gmail',  
                               attachLog: true,
                               compressLog: true
                 }
