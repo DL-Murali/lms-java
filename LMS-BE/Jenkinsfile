@@ -19,7 +19,7 @@ pipeline {
     }
 post {
     always {
-        mail bcc: '', body: '"<br> project:${env.JOB_NAME} <br> build number:${env.BUILD_NUMBER} <br> url: ${env.BUILD_URL}"', cc: 'muralialakuntla3@gmail.com', from: '', replyTo: '', subject: '${current build.result}', to: 'sathishgodavarthi89@gmail.com'
+        mail bcc: '', body: 'Project: ${env.JOB_NAME}<br/> Build Number: ${env.BUILD_NUMBER}<br/>  URL: ${env.BUILD_URL}', cc: 'muralialakuntla3@gmail.com', from: '', replyTo: '', subject: '${currentBuild.result}', to: 'sathishgodavarthi89@gmail.com'
     }
 }
 }
