@@ -22,7 +22,7 @@ pipeline {
                     if (containerExists == 0) {
                         echo 'MYSQL container already exists'
                     } else {
-                        sh 'docker container run -d --name mysql --network lmsnetwork -e MYSQL_ROOT_PASSWORD=Lms@12345 -p 3306:3306 mysql:latest '
+                        sh 'docker container rm fa162bf2abe7a0f0890c33b938fc023daa7509cbd9de05bd4d3427dd8aa157ed'
                     }    
                 }
             }
