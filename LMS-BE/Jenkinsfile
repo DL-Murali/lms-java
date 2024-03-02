@@ -27,7 +27,20 @@ pipeline {
                 }
             }
         }
-        
+        stage('check old container') {
+            steps {
+                script {
+                    def containerRunning = sh(script: 'docker inspect -f {{.state.Running}} be', returnStatus: true)
+                    if (containerRunning == 0) {
+                        sh 'docker container stop be'
+                        sh 'docker container rm be' 
+                    } else {
+                        sh 'echo conatiner not exists'                        
+                    }       
+                    }
+                }
+            }
+        }
 
         stage('Email notification') {
             steps {
@@ -43,7 +56,7 @@ pipeline {
         }
 
     }
-} 
+
        
     
 
