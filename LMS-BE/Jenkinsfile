@@ -23,10 +23,10 @@ pipeline {
                         echo 'MYSQL container already exists'
                     } else {
                         sh 'docker container run -d --name mysql --network lmsnetwork -e MYSQL_ROOT_PASSWORD=Qwerty@123 -p 3306:3306 mysql:latest'
-                }
-            }
+                    }
+               }
+           }
         }
-
         stage('check old container') {
             steps {
                 script {
