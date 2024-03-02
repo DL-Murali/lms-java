@@ -42,6 +42,13 @@ pipeline {
                 }
             }
         }
+
+        stage('Docker Build') {
+            steps {
+                sh 'cd LMS-BE && docker build -t lms-be .'
+            }
+        }
+
         stage('Email notification') {
             steps {
                 script {
