@@ -27,6 +27,7 @@ pipeline {
                 }
             }
         }
+
         stage('check old container') {
             steps {
                 script {
@@ -34,12 +35,13 @@ pipeline {
                     if (containerRunning == 0) {
                         sh 'docker container stop be'
                         sh 'docker container rm be' 
-                    } else {
+                    }
+                    else {
                         sh 'echo conatiner not exists'                        
                     }       
-                    }
                 }
             }
+        }
         stage('Email notification') {
             steps {
                 script {
