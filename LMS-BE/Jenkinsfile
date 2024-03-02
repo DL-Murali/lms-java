@@ -22,7 +22,7 @@ pipeline {
                     if (containerExists == 0) {
                         echo 'MYSQL container already exists'
                     } else {
-                        sh 'docker container rm fa162bf2abe7a0f0890c33b938fc023daa7509cbd9de05bd4d3427dd8aa157ed'
+                        sh 'docker container rm -f fa162bf2abe7a0f0890c33b938fc023daa7509cbd9de05bd4d3427dd8aa157ed'
                     }    
                 }
             }
