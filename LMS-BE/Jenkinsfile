@@ -40,8 +40,6 @@ pipeline {
                     }
                 }
             }
-        }
-
         stage('Email notification') {
             steps {
                 script {
@@ -54,8 +52,8 @@ pipeline {
                 }
             }
         }
-
     }
+}
 
        
     
